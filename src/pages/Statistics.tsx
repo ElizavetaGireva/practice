@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Layout } from "@/components/Layout";
 import { TrendingUp } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { getStatistics, StatisticsResponse, GraphInfoItem } from "@/services/statisticsService";
+import {
+  getStatistics,
+  StatisticsResponse,
+  GraphInfoItem,
+} from "@/services/statisticsService";
 import { useTelegram } from "@/hooks/useTelegram";
 import { getUser, User as AppUser } from "@/services/userService";
 
@@ -51,7 +55,8 @@ export default function Statistics() {
   // Получение дат для выбранного периода
   const getDateRange = (periodKey: string) => {
     const now = new Date();
-    const period = timePeriods.find(p => p.key === periodKey) || timePeriods[0];
+    const period =
+      timePeriods.find((p) => p.key === periodKey) || timePeriods[0];
 
     const endDate = new Date(now);
     endDate.setHours(23, 59, 59, 999);
@@ -74,8 +79,8 @@ export default function Statistics() {
 
         const { startDate, endDate } = getDateRange(selectedPeriod);
         const data = await getStatistics(
-          "2025-05-14T00:00:00Z",
-          "2025-05-15T23:59:59Z"
+          startDate.toISOString(),
+          endDate.toISOString(),
         );
 
         setStats(data);
@@ -94,11 +99,11 @@ export default function Statistics() {
   const getChartData = () => {
     if (!stats || !stats.graphInfo || stats.graphInfo.length === 0) return [];
 
-    const sortedData = [...stats.graphInfo].sort((a, b) =>
-      new Date(a.day).getTime() - new Date(b.day).getTime()
+    const sortedData = [...stats.graphInfo].sort(
+      (a, b) => new Date(a.day).getTime() - new Date(b.day).getTime(),
     );
 
-    return sortedData.map(item => item.count);
+    return sortedData.map((item) => item.count);
   };
 
   const currentData = getChartData();
@@ -120,11 +125,11 @@ export default function Statistics() {
   const getXAxisLabels = () => {
     if (!stats || !stats.graphInfo) return [];
 
-    const sortedData = [...stats.graphInfo].sort((a, b) =>
-      new Date(a.day).getTime() - new Date(b.day).getTime()
+    const sortedData = [...stats.graphInfo].sort(
+      (a, b) => new Date(a.day).getTime() - new Date(b.day).getTime(),
     );
 
-    return sortedData.map(item => {
+    return sortedData.map((item) => {
       const date = new Date(item.day);
 
       switch (selectedPeriod) {
@@ -135,7 +140,7 @@ export default function Statistics() {
         default:
           return new Intl.DateTimeFormat("ru-RU", {
             day: "numeric",
-            month: "short"
+            month: "short",
           }).format(date);
       }
     });
@@ -170,9 +175,10 @@ export default function Statistics() {
   };
 
   // Среднее значение
-  const averageRequests = currentData.length > 0
-    ? Math.round(currentData.reduce((a, b) => a + b, 0) / currentData.length)
-    : 0;
+  const averageRequests =
+    currentData.length > 0
+      ? Math.round(currentData.reduce((a, b) => a + b, 0) / currentData.length)
+      : 0;
 
   // Определение роли пользователя
   const userRole = (userData?.role || "user") as "admin" | "user";
@@ -244,9 +250,15 @@ export default function Statistics() {
                     {/* Шкала оси Y */}
                     <div className="flex flex-col-reverse justify-between h-64 absolute -ml-12 text-sm text-app-text-light">
                       <span>{Math.round(chartMin)}</span>
-                      <span>{Math.round(chartMin + (chartMax - chartMin) * 0.25)}</span>
-                      <span>{Math.round(chartMin + (chartMax - chartMin) * 0.5)}</span>
-                      <span>{Math.round(chartMin + (chartMax - chartMin) * 0.75)}</span>
+                      <span>
+                        {Math.round(chartMin + (chartMax - chartMin) * 0.25)}
+                      </span>
+                      <span>
+                        {Math.round(chartMin + (chartMax - chartMin) * 0.5)}
+                      </span>
+                      <span>
+                        {Math.round(chartMin + (chartMax - chartMin) * 0.75)}
+                      </span>
                       <span>{Math.round(chartMax)}</span>
                     </div>
 

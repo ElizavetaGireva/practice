@@ -1,4 +1,4 @@
-import { apiInstance } from '../lib/api';
+import { apiInstance } from "../lib/api";
 
 export interface GraphInfoItem {
   day: string;
@@ -10,13 +10,16 @@ export interface StatisticsResponse {
   uniqueUserInPeriod: number;
 }
 
-export const getStatistics = async (startDate: string, endDate: string): Promise<StatisticsResponse> => {
-  const url = '/statistics/graph';
+export const getStatistics = async (
+  startDate: string,
+  endDate: string,
+): Promise<StatisticsResponse> => {
+  const url = "/statistics/graph";
   const response = await apiInstance.get(url, {
     params: {
-      startDate,
-      endDate
-    }
+      start_date: startDate,
+      end_date: endDate,
+    },
   });
   return response.data;
 };

@@ -8,9 +8,7 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
     // Решение: добавьте allowedHosts с вашим хостом
-    allowedHosts: [
-      "mercifully-compatible-pickerel.cloudpub.ru"
-    ]
+    allowedHosts: ["heinously-speedy-bison.cloudpub.ru"],
   },
   plugins: [react()],
   resolve: {
