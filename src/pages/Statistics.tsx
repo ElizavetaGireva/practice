@@ -74,8 +74,8 @@ export default function Statistics() {
 
         const { startDate, endDate } = getDateRange(selectedPeriod);
         const data = await getStatistics(
-          startDate.toISOString(),
-          endDate.toISOString()
+          "2025-05-14T00:00:00Z",
+          "2025-05-15T23:59:59Z"
         );
 
         setStats(data);

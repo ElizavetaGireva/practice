@@ -12,9 +12,11 @@ export interface StatisticsResponse {
 
 export const getStatistics = async (startDate: string, endDate: string): Promise<StatisticsResponse> => {
   const url = '/statistics/graph';
-  const response = await apiInstance.post(url, {
-    startDate,
-    endDate
+  const response = await apiInstance.get(url, {
+    params: {
+      startDate,
+      endDate
+    }
   });
   return response.data;
 };

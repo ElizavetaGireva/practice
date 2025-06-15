@@ -144,7 +144,7 @@ export default function News() {
   }
 
   return (
-    <Layout userRole={(userData?.role || 'user') as 'admin' | 'user'}>
+    <Layout userRole={'admin'}>
       <div className="h-full flex flex-col">
         {/* Шапка с поиском */}
         <div className="bg-white border-b border-app-border-light px-4 py-4">

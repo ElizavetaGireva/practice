@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Базовый URL вашего API (в продакшене замените на реальный)
-const BASE_URL = 'http://77.244.221.28:8080/api/v1';
+const BASE_URL = 'https://api.et-bot.bytes2b.ru/api/v1';
 
 export const apiInstance = axios.create({
   baseURL: BASE_URL,
