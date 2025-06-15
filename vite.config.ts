@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
     // Решение: добавьте allowedHosts с вашим хостом
-    allowedHosts: ["heinously-speedy-bison.cloudpub.ru"],
+    allowedHosts: ["https://et-bot.bytes2b.ru"],
   },
   plugins: [react()],
   resolve: {

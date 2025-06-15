@@ -104,7 +104,7 @@ export default function News() {
   // Обработка состояний загрузки пользователя
   if (userLoading) {
     return (
-      <Layout userRole="user">
+      <Layout userRole={(userData?.role || "user") as "admin" | "user"}>
         <div className="h-full flex items-center justify-center">
           <p>Загрузка данных пользователя...</p>
         </div>
@@ -114,7 +114,7 @@ export default function News() {
 
   if (userError) {
     return (
-      <Layout userRole="user">
+      <Layout userRole={(userData?.role || "user") as "admin" | "user"}>
         <div className="h-full flex items-center justify-center">
           <p className="text-red-500">{userError}</p>
         </div>
@@ -144,7 +144,7 @@ export default function News() {
   }
 
   return (
-    <Layout userRole={'admin'}>
+    <Layout userRole={(userData?.role || "user") as "admin" | "user"}>
       <div className="h-full flex flex-col">
         {/* Шапка с поиском */}
         <div className="bg-white border-b border-app-border-light px-4 py-4">

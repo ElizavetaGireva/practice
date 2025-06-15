@@ -9,9 +9,12 @@ declare global {
 }
 
 import { useEffect, useState } from 'react';
+//import { useLaunchParams } from '@telegram-apps/sdk-react';
 
 // Константа для заглушки
 const DEV_TELEGRAM_ID = '764381135';
+const tg = window.Telegram.WebApp;
+//console.log(useLaunchParams());
 
 export const useTelegram = () => {
   const [telegramId, setTelegramId] = useState<string | null>(null);
